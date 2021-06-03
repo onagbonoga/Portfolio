@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+		<title>BlackjackGame</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class = "is-preload">
+		<header id="header">
+		<a href="small.html" class="logo">Back</a>
+	</header>
+	<div id = "main">
+		<h2>BlackJackGame.py</h2>
+			<pre><code>i = 0;
+
+	#Global Variables
+p1cards = 0
+comcards = 0
+status = 0 #1 will be for player win. 2 for dealer win
+
+currentbet = 0
+import random
+class Card():
+    def __init__ (self,card):
+        self.card = card
+    #methods    
+    def __str__ (self):
+       return self.card
+#Bank class
+class Bank():
+    def __init__(self,balance):
+        self.balance = balance
+        #Methods
+    def add_sub(self,damount):
+        self.balance = self.balance + damount
+    def bet(self,betamount):
+        if self.balance > betamount:
+            self.balance = self.balance - betamount
+            print(f'you are betting ${betamount}. You have ${self.balance} remaining')
+        else:
+            print("Insufficient funds")
+    def viewbalance(self):
+        print(f"you have {self.balance} in the bank")
+    def returnbalance(self):
+        return self.balance
+
+#deck class
+class Deck():
+    def __init__(self):
+        suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
+        ranks = ('2_Two', '3_Three', '4_Four', '5_Five', '6_Six', '7_Seven', '8_Eight', '9_Nine', '0_Ten', 'J_Jack', 'Q_Queen', 'K_King', 'A_Ace')
+        self.deck = []
+        for suit in suits:
+            for rank in ranks:
+                currentcard = rank +"_of_"+ suit
+                self.deck.append(currentcard)
+    #methods
+    def shuffle(self):
+        random.shuffle(self.deck)
+    def deal(self):
+        return self.deck.pop()
+    def contents(self):
+        print(f"{len(self.deck)} cards left in this deck")
+#hand class.
+#There will be two hand instances. COM and P1. These will be the inputs to the hit, stay functions 
+class Hand():
+    def __init__ (self):
+        self.hand = []
+    def addcard(self,newcard):
+        self.hand.append(newcard)
+    def aceadjust(self,acestatus):
+        pass
+    def checkhand(self):
+        for card in self.hand:
+            print(f"you have {card}\n")
+    def checkonecard(self):
+        print(f"                                                                       the computer has {self.hand[0]}\n")
+
+            #Creating instances of the class
+com = Hand()
+p1 = Hand()
+#Global Variables
+pbank = Bank(100)
+currentdeck = Deck()
+#Functions
+##Initialize game function
+def initialize():
+    play = input("Welcome to Blackjack!\nStart Game? Y or N")
+    if play == 'Y' or play == 'y':
+        pbank.viewbalance()
+        bet = int(input("how much would you like to bet:       $"))
+        currentbet = pbank.bet(bet)
+        while pbank.returnbalance() > 0 and status == 0:
+            start()
+    else:
+        print("Goodbye")
+        
+def hit():
+    global p1cards
+    global comcards
+    x = currentdeck.deal()
+    try:
+        p1cards += int(x[0])
+    except:
+        if x[0] == 'K' or x[0] == 'Q' or x[0] == 'J':
+            p1cards += 10
+        elif x[0] == 'A':
+            p1cards += int(input("You drew an Ace. Do you want it to count as 1 or 11?"))
+    p1.addcard(x)
+    displayhands()
+    if p1cards > 21:
+        print("Bust")
+        initialize()
+
+def stand():
+    for count in range (0,2):
+        if p1cards > comcards and p1cards <= 21:
+            print("Player wins")
+            initialize()
+            status = 1
+            pbank.add_sub(currentbet*2)
+        elif comcards > p1cards and comcards <= 21:
+            print("Dealer wins")
+            initialize()
+            status = 2
+            pbank.add_sub(-(currentbet*2))
+        elif comcards == p1cards:
+            print("Draw")
+            initialize()
+        else:
+            while comcards < 17:
+                x = currentdeck.deal()
+                try:
+                    comcards += int(x[0])
+                except:
+                    if x[0] == 'K' or x[0] == 'Q' or x[0] == 'J':
+                        comcards += 10
+                    elif x[0] == 'A':
+                        comcards += 11
+                com.addcard(x)
+    displayhands()
+    
+    
+
+
+def displayhands():
+    p1.checkhand()
+    com.checkonecard()
+    print(f"Player Total = {p1cards}                                                             Dealer Total = {comcards}\n")
+    
+#start function
+def start():
+    global p1cards
+    global comcards
+    global status
+    global currentdeck
+    currentdeck.shuffle()
+    if status != 0:
+        pbank.viewbalance()
+        bet = int(input("how much would you like to bet:       $"))
+        currentbet = pbank.bet(bet)
+    
+    for count in range(0,2):
+        #Players Draw######################################################
+        x = currentdeck.deal()
+        try:
+            p1cards += int(x[0])
+        except:
+            if x[0] == 'K' or x[0] == 'Q' or x[0] == 'J':
+                p1cards += 10
+            elif x[0] == 'A':
+                p1cards += int(input("You drew an Ace. Do you want it to count as 1 or 11?"))
+        p1.addcard(x)
+        #Dealers draw#########################################################
+        x = currentdeck.deal()
+        try:
+            comcards += int(x[0])
+        except:
+            if x[0] == 'K' or x[0] == 'Q' or x[0] == 'J':
+                comcards += 10
+            elif x[0] == 'A':
+                comcards += 11
+        com.addcard(x)
+    
+    
+    displayhands()
+    ##Check for bust or blackjack
+    if p1cards > 21:
+        print('Bust')
+        status = 3
+    elif p1cards == 21:
+        print('Blackjack')
+        status = 3
+    #I will have a variable called turn. The player will decide to hit or stand (hit or stand)
+    turn = input("What would you like to do?\n                          'H' - Hit\n                          'S' - Stand")
+    if turn == 'H' or turn == 'h':
+        hit()
+    elif turn =='S' or turn == 'stand':
+        stand()
+    
+
+    
+initialize();
+		</code></pre>
+	</div>
+
+</body>
+
+</html>

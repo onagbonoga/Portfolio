@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+		<title>toDoApp</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class = "is-preload">
+		<header id="header">
+		<a href="small.html" class="logo">Back</a>
+	</header>
+	<div id = "main">
+		<h2>index.html</h2>
+			<pre><code>
+                ?lshtml?gt
+    &lthead>
+        &ltlink rel="stylesheet" href="style.css">
+    &lt/head>
+    &ltbody>
+        &ltdiv id="root">&lt/div>
+        &ltscript src="index.pack.js">&lt/script>
+    &lt/body>
+    &lt/html>
+            </code></pre>
+
+        <h2>index.js</h2>
+            <pre><code>
+    import React from "react"
+    import ReactDOM from "react-dom"
+
+    import App from "./App"
+
+    ReactDOM.render(<App />, document.getElementById("root"))
+            </code></pre>
+
+
+        <h2>App.js</h2>
+            <pre><code>
+                import React from 'react';
+import ToDoItem from './ToDoItem'
+import todos from "./todosData"
+
+class App extends React.Component
+{
+    constructor(){
+        super()
+        this.state = {items: todos}
+         this.handleChange = this.handleChange.bind(this)   
+        }
+    
+    handleChange(id){
+        this.setState(prevState => {
+            const updatedTodos = prevState.items.map(tod => {
+                if(tod.id === id){
+                    return{
+                        ...tod,
+                        completed: !tod.completed 
+                    }
+                }
+                return tod
+            })
+            return {items:updatedTodos}
+        })
+    }
+    render(){
+        const todoArray = this.state.items.map(todo => 
+        &ltToDoItem
+        key = {todo.id}
+        id = {todo.id} 
+        item = {todo.item}
+        completed = {todo.completed}
+        handleChange = {this.handleChange}
+        />)
+        
+        return(
+            &ltdiv>
+                {todoArray}
+            &lt/div>
+        )
+    }
+}
+export default App
+            </code></pre>
+
+        <h2>TodoItem.js</h2>
+            <pre><code>
+    import React from 'react'
+
+    function ToDoItem(props){
+    const completedStyle = {
+        fontstyle: "italic",
+        textDecoration: "line-through"
+    }
+    return(
+        &ltdiv className = "theList">
+            &ltinput type = "checkbox" checked={props.completed} onChange = {() => props.handleChange(props.id)}/>
+            &ltp className = "listitems" style = {props.completed ? completedStyle:null }>{props.item}</p>
+        &lt/div>
+    )
+}
+
+export default ToDoItem
+            </code></pre>
+
+
+        <h2>style.css</h2>
+            <pre><code>
+                body{
+    background-color:whitesmoke
+}
+.theList { 
+    background-color:white;
+    margin:auto;
+    width:50%;
+    display: flex;
+}
+
+.listitems{
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 18px;
+    color: #4d4d4d;
+    transform: translate(50px,5px);
+    border-bottom:1px solid #8c8c8c;
+    padding: 20px 2px 30px
+}
+input[type = checkbox]{
+    transform: scale(1.4) translate(15px,32px);
+}
+            </code></pre>
+
+        <h2>todosData.js</h2>
+            <pre><code>
+                const todos =
+[
+   {
+       id: 1,
+       item: "Clean apartment",
+       completed: true
+   },
+      {
+       id: 2,
+       item: "Get a job",
+       completed: false
+   }, 
+      {
+       id: 3,
+       item:"Cook for the year",
+       completed: true
+   }, 
+      {
+       id: 4,
+       item:"Complete circuit",
+       completed: true
+   } 
+] 
+export default todos
+            </code></pre>
+	</div>
+
+</body>
+
+</html>

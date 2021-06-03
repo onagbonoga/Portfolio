@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+		<title>Programmable Pulse Generator</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class = "is-preload">
+		<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="logo">Back</a>
+	</header>
+
+	<div id = "main">
+		<h2>Programmable Pulse Generator</h2>
+		<h3>Project Description</h3>
+		<p>The goal of this project is to design a low cost (<$10) system capable of generating various waveforms on two analog outputs while also providing two analog inputs allow measurement of the amplitude of a signal, providing feedback for automatic level control and load impedance estimation
+		This project has a command line interface capable of controlling the system and providing measurement data back to the user. This device can generate;
+		<ul>
+			<li>DC signals between -5V and +5V</li>
+			<li>Sine waves with amplitudes ranging from -5V to +5V, specified offset and frequencies ranging from 0Hz to 50KHz</li>
+			<li>Square waves with amplitudes ranging from -5V to +5V, specified offset, frequencies ranging from 0Hz to 50KHz and programmable duty cycle</li>
+			<li>Sawtooth waves with amplitudes ranging from -5V to +5V, specified offset and frequencies ranging from 0Hz to 50KHz</li>
+			<li>Trainge waves with amplitudes ranging from -5V to +5V, specified offset and frequencies ranging from 0Hz to 50KHz</li>
+		</ul>
+		</p>
+		<h3>Components</h3>
+		<ul>
+			<li>TM4C123GH6PMI; 32-Bit ARM Cortex M4F microcontroller</li>
+			<li>MAX660 Switched Capacitor Voltage Converter</li>
+			<li>MCP4822 Digital to Analog Converter (DAC) </li>
+			<li>Operational Amplifiers</li>
+			
+		</ul>
+		<h3>Skills and Software Used</h3>
+		<ul>
+			<li>PCB Layout and Design in Eagle</li>
+			<li>C programming</li>
+			<li>Knowledge from embedded systems; GPIO, ADC, SPI, UART</li>
+			<li></li>
+		</ul>
+		<h3>Images</h3>
+			<ol>
+				<li>PCB Schematic in Eagle</li>
+				<li>Routed PCB in eagle</li>
+				<li>PCB and TM4C123GXL (Red Board)</li>
+				<li>Serial Terminal running program</li>
+				<li>Results on oscilloscope</li>
+				<li>Results on oscilloscope</li>
+			</ol>
+		<div class="box alt">
+			<div class="row gtr-50 gtr-uniform">
+				<div class="col-4"><span class="image fit"><img src="images/psgsch.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/psgbrd.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/psgpcb.jpg" alt="" /></span></div>
+											<!-- Break -->
+				<div class="col-4"><span class="image fit"><img src="images/putty.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/scope1.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/scope2.jpg" alt="" /></span></div>
+			</div>
+		</div>
+		<h3><a href = "https://github.com/onagbonoga/Programmable-Pulse-Generator-">Click to view Source Code</a></h3>
+		<h3><a href = "index.html">Return Home</a></h3>
+	</div>
+
+</body>
+
+</html>
