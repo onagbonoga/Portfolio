@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+		<title>State Machine Aisc</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class = "is-preload">
+		<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="logo">Home</a>
+	</header>
+
+	<div id = "main">
+		<h2>Carwash State Machine Asic</h2>
+		<h3>Project Description</h3>
+		<p>The goal of this project was to create a complete layout for a design of choice from the logic deisgn and Verilog coding to the final placement and routing. I chose to create a design that simulates the operation of an automatic carwash system .  </p>
+		<h3>Design Process</h3>
+		
+		<p><b>Logic Design</b> <br/>
+		In this stage I defined by functionlaity of my design and translated it into Verilog code. The Verilog code has three modules; a top-level module that goes through different stages of the wash based on the selection, a timer that counts down a fixed amount of time depending on what stage the carwash is in, and a Point of Sale (POS) module that received inputs and checks if the payment for the carwash service is valid. The state diagram is shown below, the timer symbol indicates there is a set amount of time that passes before the transition to the next state.<br/><img src="images/asic1.png"></p>
+
+		<p><b>Standard Cell Library Layout</b> <br/>
+		In this stage of the process the building blocks of the design known as cells are created and simulated using cadence virtuoso and HSPICE respectively. The cells designed for this project include: AOI211, AOI22, D-Flip Flop, Inverter, 2:1 Multiplexer,  NAND2, NOR2, OAI21, and XOR2. Each cell is tested to ensure it passes the Design rule check which ensures the design is compatible with the 65nm process described in the global foundries handout and the layout vs Schematic check which ensures the layout has the same functionality as the schematic that we create. The cells created in this stage are shown below<br/>
+		<div class="box alt">
+			<div class="row gtr-50 gtr-uniform">
+				<div class="col-4"><span class="image fit"><img src="images/cells/1.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/2.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/3.jpg" alt="" /></span></div>
+											<!-- Break -->
+				<div class="col-4"><span class="image fit"><img src="images/cells/4.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/5.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/6.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/7.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/8.jpg" alt="" /></span></div>
+				<div class="col-4"><span class="image fit"><img src="images/cells/9.jpg" alt="" /></span></div>
+			</div>
+		</div>
+		</p>
+
+		<p><b>Design Synthesis</b> <br/>
+		Synthesis the process of translating the behavioral Verilog code into a gate level netlist that can be implemented into a physical chip. Using the Synopsys tool, the process is quick and easy provided the cells were characterized correctly using SiliconSmart to generrate a cell library and the Verilog code is free from errors.</br>After this stage, the verilog code that was once made up of behavioral verilog statements like always, if and else etc, has now been translated into equaivalent expressions made from the cells in the standard cell libraries NAND2, NOR2 etc. </p>
+
+		<p><b>Placement and Routing</b> <br/>
+		This is the step where it all comes together, the netlist generated from the synthesis step is implemented using the cell designed in the Standard cell library design step. After importing the design into placement and routing tool; Innovus, the locations, shape and sizes of the design are determined in the floorplan, then rings for connecting the power and ground nets are added around the perimeter before the final placement and route steps. Below is the complicated looking layout! good thing I didn't have to do it by hand :D<br/><img src="images/cells/final.png"></p>
+		<p><b>Testing</b> <br/>
+			This is where we make sure the cell works by passing the design rule check, layout vs schematic check and running a HSPICE simulation to ensure it functions exactly as we want it to.
+			<p/>
+
+		<h3>Skills and Software Used</h3>
+		<ul>
+			<li>Verilog</li>
+			<li>Cadence Virtuoso</li>
+			<li>Cadence Innovus</li>
+			<li>Design Vision</li>
+			<li>Primetime</li>
+			<li>Silicon Smart</li>
+		</ul>
+
+	
+		<h3><a href = "https://github.com/onagbonoga/qwik_pix_fx">Click to view Source Code</a></h3>
+		<h3><a href = "index.html">Return Home</a></h3>
+	</div>
+
+</body>
+
+</html>
