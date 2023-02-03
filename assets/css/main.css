@@ -2618,6 +2618,12 @@ input, select, textarea {
 			top: 0.75rem;
 		}
 
+		.image.cen{
+			margin: 0 0 2rem 2rem;
+			top: 0.75rem;
+			
+		}
+
 		.image.fit {
 			display: block;
 			margin: 2.5rem 0;
@@ -2630,6 +2636,20 @@ input, select, textarea {
 
 			.image.fit img {
 				width: 100%;
+			}
+
+		.image.fit2 {
+			display: block;
+			margin: 2.5rem 0;
+			width: 100%;
+		}
+
+			.image.fit2:first-child {
+				margin-top: 0;
+			}
+
+			.image.fit2 img {
+				width: 50%;
 			}
 
 		.image.main {
